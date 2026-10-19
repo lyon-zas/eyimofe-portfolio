@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f3f0e8;
+  --color-paper-2: #ebe7dc;
+  --color-ink: #121212;
+  --color-ink-2: #4a4a46;
+  --color-night: #0d0d0f;
+  --color-night-2: #17171b;
+  --color-lime: #d4ff3a;
+  --color-cobalt: #3b5bfd;
+  --color-card: #ffffff;
+  --color-coal: #121212;
+  --color-bone: #f3f0e8;
+  --font-sans: "Inter Tight Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-display: "Ojuju Variable", "Impact", ui-sans-serif, sans-serif;
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+/* Dark theme: follows the OS unless data-theme on <html> says otherwise. */
+:root { color-scheme: light; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-paper: #111113;
+    --color-paper-2: #17171a;
+    --color-ink: #f1eee6;
+    --color-ink-2: #a9a69e;
+    --color-night: #070708;
+    --color-cobalt: #8098ff;
+    --color-card: #1c1c20;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --color-paper: #111113;
+  --color-paper-2: #17171a;
+  --color-ink: #f1eee6;
+  --color-ink-2: #a9a69e;
+  --color-night: #070708;
+  --color-cobalt: #8098ff;
+  --color-card: #1c1c20;
+  color-scheme: dark;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+html { scroll-behavior: smooth; background: var(--color-paper); }
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::selection { background: var(--color-lime); color: var(--color-ink); }
+
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* CSS 3D phone: stacked layers fake the device's thickness. */
+.phone-scene { perspective: 1800px; }
+.phone {
+  position: relative;
+  aspect-ratio: 71.6 / 147.6; /* iPhone 15 body */
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.phone-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: 13% / 6%;
+  background: #1b1b1f;
+}
+.phone-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 13% / 6%;
+  background: linear-gradient(145deg, #3a3a40, #0f0f12 40%, #26262b);
+  padding: 3.2%;
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.12), inset 0 0 0 4px #0a0a0c;
+  transform: translateZ(0);
+}
+.phone-screen {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 11% / 5.2%;
+  background: #fff;
+}
+.phone-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,0) 32%, rgba(255,255,255,0) 70%, rgba(255,255,255,.08) 100%);
+}
+.phone-island {
+  position: absolute;
+  top: 2.2%;
+  left: 50%;
+  width: 30%;
+  height: 3.4%;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #050506;
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-marquee, .animate-float { animation: none !important; }
+}
+
+/* Ojuju is a variable face; headings use its heaviest cut. */
+.font-display { font-weight: 800; letter-spacing: -0.02em; }

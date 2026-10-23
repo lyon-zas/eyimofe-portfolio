@@ -318,7 +318,7 @@ export function MockScreen({ kind, accent, name }: { kind: MockKind; accent: str
         <div style={{ fontSize: u(6.5), fontWeight: 800 }}>Communities</div>
         <div style={{ display: 'flex', gap: u(2.5), marginTop: u(4) }}>
           {[accent, '#f59e0b', '#22c55e', '#ef4444', '#0ea5e9'].map((c, i) => (
-            <div key={c} style={{ width: u(13), height: u(13), borderRadius: '50%', background: c, border: `${u(0.8)} solid ${i === 0 ? '#111' : '#fff'}` }} />
+            <div key={i} style={{ width: u(13), height: u(13), borderRadius: '50%', background: c, border: `${u(0.8)} solid ${i === 0 ? '#111' : '#fff'}` }} />
           ))}
         </div>
         {[

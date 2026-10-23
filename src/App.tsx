@@ -116,8 +116,18 @@ function Hero() {
   )
 }
 
+// Investor tag beside an app name, the way startups write "YC W24".
+function Backed({ label, inline = true }: { label: string; inline?: boolean }) {
+  return (
+    <span className={`${inline ? 'ml-3 translate-y-[-0.35em] ' : ''}inline-block rounded-full bg-[#1a1f71] px-3 py-1 align-middle font-sans text-xs font-semibold normal-case tracking-normal text-white sm:text-sm`}>
+      {label}
+    </span>
+  )
+}
+
 function ScreenMarquee() {
-  const strip = apps.flatMap((a) => a.screens.map((s, i) => ({ s, a, key: `${a.slug}-${i}` })))
+  // Only real screenshots here; mock screens stay on the concept pages.
+  const strip = apps.flatMap((a) => (a.gallery ?? a.screens).filter((s) => s.src).slice(0, 3).map((s, i) => ({ s, a, key: `${a.slug}-${i}` })))
   return (
     <div className="relative -mx-4 mt-4 overflow-hidden pb-16 pt-6 sm:-mx-6 [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
       <div className="animate-marquee flex w-max gap-6" style={{ ['--marquee-duration' as string]: '70s' }}>
@@ -185,7 +195,7 @@ function Apps() {
                     <span className="h-px w-8 bg-white/20" />
                     {a.role} · {a.years}
                   </div>
-                  <h3 className="mt-4 font-display text-[10vw] uppercase sm:text-5xl lg:text-6xl"><a href={`#app-${a.slug}`} className="transition hover:text-lime">{a.name}</a></h3>
+                  <h3 className="mt-4 font-display text-[10vw] uppercase sm:text-5xl lg:text-6xl"><a href={`#app-${a.slug}`} className="transition hover:text-lime">{a.name}</a>{a.backedBy && <Backed label={a.backedBy} />}</h3>
                   <p className="mt-2 font-serif text-2xl italic" style={{ color: a.accent === '#3b5bfd' ? '#8aa0ff' : a.accent }}>{a.tagline}</p>
                   <p className="mt-5 max-w-lg leading-relaxed text-white/70">{a.description}</p>
                   {a.stats && (
@@ -243,7 +253,7 @@ function Details({ app: a }: { app: AppT }) {
         <div className="mt-8 grid items-center gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
             <div className="text-sm text-ink-2">{a.role} · {a.years} · {a.platforms}</div>
-            <h1 className="mt-3 font-display text-[13vw] uppercase leading-[0.95] sm:text-7xl lg:text-8xl">{a.name}</h1>
+            <h1 className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 font-display text-[13vw] uppercase leading-[0.95] sm:text-7xl lg:text-8xl">{a.name}{a.backedBy && <Backed label={a.backedBy} inline={false} />}</h1>
             <p className="mt-3 font-serif text-3xl italic text-cobalt">{a.tagline}</p>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-2">{a.description}</p>
             <div className="mt-8"><LinkButtons links={a.links} web={a.kind === 'web'} /></div>

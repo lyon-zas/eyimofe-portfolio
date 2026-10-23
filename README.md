@@ -37,5 +37,5 @@ Everything you'd want to change is in `src/data.ts`:
   without cropping, and writes the small copy the 3D phones use.
 - `aiWork`, `journey`, `education`, `services`, `numbers`, `traits`.
 
-The hero 3D scene (`src/components/HeroScene.tsx`) uses the three Kulawise
+The hero 3D scene (`src/components/HeroScene.tsx`) uses Owego, Kulawise and Nearpays
 screenshots; swap the `src` props to feature other apps.

@@ -120,9 +120,9 @@ export default function HeroScene() {
       <directionalLight position={[3, 5, 4]} intensity={2.2} />
       <directionalLight position={[-4, -2, 2]} intensity={0.6} color="#d4ff3a" />
       <pointLight position={[0, 0, 3]} intensity={6} color="#ffffff" />
-      <Phone src="apps/kulawise/screens/chat.jpg" position={[-1.35, -0.1, -0.6]} rotation={[0.06, 0.38, 0.05]} speed={1.2} />
-      <Phone src="apps/kulawise/screens/topicsA.jpg" position={[1.35, -0.05, -0.6]} rotation={[0.06, -0.38, -0.05]} speed={1.1} />
-      <Phone src="apps/kulawise/screens/home.jpg" position={[0, 0.1, 0.4]} rotation={[0.04, -0.12, 0]} speed={1.4} />
+      <Phone src="apps/owego/screens/home.jpg" position={[-1.35, -0.1, -0.6]} rotation={[0.06, 0.38, 0.05]} speed={1.2} />
+      <Phone src="apps/nearpays/screens/home.jpg" position={[1.35, -0.05, -0.6]} rotation={[0.06, -0.38, -0.05]} speed={1.1} />
+      <Phone src="apps/kulawise/screens/dashboard.jpg" position={[0, 0.1, 0.4]} rotation={[0.04, -0.12, 0]} speed={1.4} />
       <AgentGraph />
       <ContactShadows position={[0, -1.9, 0]} opacity={0.35} scale={9} blur={2.6} far={3} />
       <Rig />
